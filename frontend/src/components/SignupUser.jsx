@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import Webcam from 'react-webcam';
 import { motion } from 'framer-motion';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import BiometricAuth from './BiometricAuth';
 
 const webcamConfig = {

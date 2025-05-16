@@ -4,7 +4,6 @@ import axios from 'axios';
 import BiometricAuth from './BiometricAuth';
 import { motion } from 'framer-motion';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const SignupProfessional = () => {
   const navigate = useNavigate();

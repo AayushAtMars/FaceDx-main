@@ -7,16 +7,16 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-    dedupe: ['react', 'react-dom', 'react-toastify']
+      '@': path.resolve(__dirname, './src')
+    }
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^/api/ '')
+  build: {
+    rollupOptions: {
+      external: ['react-toastify'],
+      output: {
+        globals: {
+          'react-toastify': 'ReactToastify'
+        }
       }
     }
   },
