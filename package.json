@@ -1,0 +1,21 @@
+{
+  "name": "facedx",
+  "version": "1.0.0",
+  "description": "FaceDX - Your Medical History at Your Fingertips",
+  "scripts": {
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && node index.js",
+    "start": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.1.3",
+    "facemed": "file:",
+    "react-toastify": "^11.0.5"
+  }
+}
