@@ -41,17 +41,23 @@ const LoginPage = () => {
       }
 
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, loginData);
-      const { token, user } = response.data;
+      const { token } = response.data;
 
-      if (!token || !user) {
+      if (!token) {
         throw new Error('Invalid response from server');
       }
 
-      toast.success('Login successful! Redirecting...');
       localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('role', role);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      // Fetch user profile after successful login
+      const profileResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/profile`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      localStorage.setItem('user', JSON.stringify(profileResponse.data));
+      toast.success('Login successful! Redirecting...');
 
       if (role === 'user') {
         navigate('/user-dashboard');
