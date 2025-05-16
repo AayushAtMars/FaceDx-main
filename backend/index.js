@@ -28,7 +28,7 @@ const app = express();
 
 // Configure CORS
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || '*',
+    origin: ['https://face-dx.vercel.app', 'https://facedx-main.vercel.app', process.env.CORS_ORIGIN].filter(Boolean),
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
     exposedHeaders: ['Authorization'],
