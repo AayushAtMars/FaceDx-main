@@ -28,12 +28,14 @@ const app = express();
 
 // Configure CORS
 app.use(cors({
-    origin: ['https://face-dx.vercel.app', 'https://facedx-main.vercel.app', process.env.CORS_ORIGIN].filter(Boolean),
+    origin: ['https://face-dx.vercel.app', 'https://face-dx-main.vercel.app', 'https://facedx-main.vercel.app', process.env.CORS_ORIGIN].filter(Boolean),
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
-    exposedHeaders: ['Authorization'],
     credentials: true
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 // Middleware
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -47,11 +49,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Use routes
-app.use('/chatbot', chatbotRoutes);
-app.use('/medical-records', medicalRecordsRouter);
-app.use('/user', userRouter);
-app.use('/professional', professionalRouter);
+// Use routes with /api prefix
+app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/medical-records', medicalRecordsRouter);
+app.use('/api/user', userRouter);
+app.use('/api/professional', professionalRouter);
+app.use('/api/login', require('./routes/auth'));
 app.use('/', medicalRecordsRouter); // Mount at root since routes include full paths
 
 // Load face-api models
