@@ -10,17 +10,23 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src')
     }
   },
-  build: {
-    rollupOptions: {
-      external: ['react-toastify'],
-      output: {
-        globals: {
-          'react-toastify': 'ReactToastify'
-        }
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `$i: 0;`
       }
     }
   },
-  optimizeDeps: {
-    include: ['react-toastify']
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['@headlessui/react', 'framer-motion'],
+          utils: ['axios', 'date-fns']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 600
   }
 })
