@@ -20,6 +20,7 @@ router.post('/register-user', upload.single('photo'), async (req, res) => {
   try {
     const {
       name,
+      email,
       aadharNumber,
       password,
       emergencyContact,
@@ -31,7 +32,7 @@ router.post('/register-user', upload.single('photo'), async (req, res) => {
     } = req.body;
 
     // Check if user already exists
-    const existingUser = await User.findOne({ aadharNumber });
+    const existingUser = await User.findOne({ $or: [{ aadharNumber }, { email }] });
     if (existingUser) {
       return res.status(400).json('User already exists');
     }
@@ -43,6 +44,7 @@ router.post('/register-user', upload.single('photo'), async (req, res) => {
     // Create new user
     const user = new User({
       name,
+      email,
       aadharNumber,
       password: hashedPassword,
       emergencyContact,
