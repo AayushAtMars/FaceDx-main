@@ -28,7 +28,7 @@ const app = express();
 
 // Configure CORS
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:3001'],
+    origin: process.env.CORS_ORIGIN || '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
     exposedHeaders: ['Authorization'],
@@ -808,7 +808,7 @@ app.use((err, req, res, next) => {
 const initializeServer = async () => {
   try {
     await loadModels();
-    const PORT = process.env.PORT || 3001;
+    const PORT = process.env.PORT || 10000;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
