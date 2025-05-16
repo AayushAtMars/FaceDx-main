@@ -40,7 +40,10 @@ const LoginPage = () => {
         };
       }
 
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, loginData);
+      console.log('Attempting login with backend URL:', import.meta.env.VITE_BACKEND_URL);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, loginData, {
+        timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000')
+      });
       const { token } = response.data;
 
       if (!token) {
@@ -52,8 +55,10 @@ const LoginPage = () => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       // Fetch user profile after successful login
+      console.log('Fetching user data...');
       const profileResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/profile`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
+        timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000')
       });
 
       localStorage.setItem('user', JSON.stringify(profileResponse.data));
