@@ -41,7 +41,7 @@ const LoginPage = () => {
       }
 
       console.log('Attempting login with backend URL:', import.meta.env.VITE_BACKEND_URL);
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/login`, loginData, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, loginData, {
         timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000')
       });
       const { token } = response.data;
@@ -56,7 +56,7 @@ const LoginPage = () => {
 
       // Fetch user profile after successful login
       console.log('Fetching user data...');
-      const profileResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
+      const profileResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/profile`, {
         headers: { Authorization: `Bearer ${token}` },
         timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000')
       });

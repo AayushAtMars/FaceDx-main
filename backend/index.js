@@ -49,12 +49,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Use routes with /api prefix
-app.use('/api/chatbot', chatbotRoutes);
-app.use('/api/medical-records', medicalRecordsRouter);
-app.use('/api/user', userRouter);
-app.use('/api/professional', professionalRouter);
-app.use('/api/login', require('./routes/auth'));
+// Use routes
+app.use('/chatbot', chatbotRoutes);
+app.use('/medical-records', medicalRecordsRouter);
+app.use('/user', userRouter);
+app.use('/professional', professionalRouter);
+app.use('/', require('./routes/auth')); // Mount auth routes at root
 app.use('/', medicalRecordsRouter); // Mount at root since routes include full paths
 
 // Load face-api models
