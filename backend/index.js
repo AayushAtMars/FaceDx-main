@@ -50,12 +50,12 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Use routes
-app.use('/chatbot', chatbotRoutes);
-app.use('/medical-records', medicalRecordsRouter);
-app.use('/user', userRouter);
-app.use('/professional', professionalRouter);
-app.use('/', require('./routes/auth')); // Mount auth routes at root
-app.use('/', medicalRecordsRouter); // Mount at root since routes include full paths
+app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/medical-records', medicalRecordsRouter);
+app.use('/api/user', userRouter);
+app.use('/api/professional', professionalRouter);
+app.use('/api', require('./routes/auth')); // Mount auth routes at /api
+app.use('/api', medicalRecordsRouter); // Mount at /api
 
 // Load face-api models
 const loadModels = async () => {

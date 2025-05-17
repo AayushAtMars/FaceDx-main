@@ -45,7 +45,7 @@ const LoginPage = () => {
       }
 
       console.log('Attempting login...');
-      const response = await axios.post('/login', loginData);
+      const response = await axios.post('/api/login', loginData);
       const { token } = response.data;
 
       if (!token) {
@@ -58,7 +58,7 @@ const LoginPage = () => {
 
       // Fetch user profile after successful login
       console.log('Fetching user data...');
-      const profileResponse = await axios.get('/user/profile', {
+      const profileResponse = await axios.get('/api/user/profile', {
         headers: { Authorization: `Bearer ${token}` },
         timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000')
       });

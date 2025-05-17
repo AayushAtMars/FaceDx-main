@@ -42,7 +42,7 @@ const MedicalRecords = ({ userId, isProfessional = false, aadharNumber: provided
           }
 
           // If not in token, fetch from profile
-          const response = await axios.get('http://localhost:3001/api/user/profile', {
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -100,7 +100,7 @@ const MedicalRecords = ({ userId, isProfessional = false, aadharNumber: provided
       }
 
       console.log('Fetching records for Aadhar:', aadharNumber);
-      const response = await axios.get(`http://localhost:3001/api/medical-records/aadhar/${aadharNumber}`, {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/medical-records/aadhar/${aadharNumber}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -170,7 +170,7 @@ const MedicalRecords = ({ userId, isProfessional = false, aadharNumber: provided
 
     try {
       console.log('Uploading medical record for Aadhar:', aadharNumber);
-      const response = await axios.post('http://localhost:3001/api/medical-records/upload', formData, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/medical-records/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
