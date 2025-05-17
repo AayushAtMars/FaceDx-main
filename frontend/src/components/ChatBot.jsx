@@ -4,7 +4,11 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
   timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000'),
-  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+  headers: { 
+    'Content-Type': 'application/json', 
+    Accept: 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}` 
+  },
 });
 
 api.interceptors.request.use(request => {

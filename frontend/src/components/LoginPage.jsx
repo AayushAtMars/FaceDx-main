@@ -5,6 +5,10 @@ import { motion } from 'framer-motion';
 import { toast, ToastContainer } from 'react-toastify';
 import BiometricAuth from './BiometricAuth';
 
+// Configure axios defaults
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
+axios.defaults.timeout = parseInt(import.meta.env.VITE_API_TIMEOUT || '30000');
+
 const LoginPage = () => {
   const [role, setRole] = useState('user');
   const [identifier, setIdentifier] = useState('');
@@ -40,10 +44,8 @@ const LoginPage = () => {
         };
       }
 
-      console.log('Attempting login with backend URL:', import.meta.env.VITE_BACKEND_URL);
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, loginData, {
-        timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000')
-      });
+      console.log('Attempting login...');
+      const response = await axios.post('/login', loginData);
       const { token } = response.data;
 
       if (!token) {
@@ -56,7 +58,7 @@ const LoginPage = () => {
 
       // Fetch user profile after successful login
       console.log('Fetching user data...');
-      const profileResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/profile`, {
+      const profileResponse = await axios.get('/user/profile', {
         headers: { Authorization: `Bearer ${token}` },
         timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000')
       });
