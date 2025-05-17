@@ -84,7 +84,7 @@ const connectDB = async () => {
 connectDB();
 
 // Register User
-app.post('/register-user', upload.single('photo'), async (req, res) => {
+app.post('/api/register-user', upload.single('photo'), async (req, res) => {
     try {
         console.log('Starting user registration...');
         console.log('Received form data:', {
