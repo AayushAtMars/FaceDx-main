@@ -27,7 +27,7 @@ const UserDashboard = () => {
         }
 
         console.log('Fetching user data...');
-        const response = await axios.get('http://localhost:3001/api/user/profile', {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -60,7 +60,7 @@ const UserDashboard = () => {
 
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.post('http://localhost:3001/update-photo', formData, {
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/update-photo`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
@@ -84,7 +84,7 @@ const UserDashboard = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3001/update', formData, {
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/update`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

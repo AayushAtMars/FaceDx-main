@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001',
-  timeout: 30000,
+  baseURL: import.meta.env.VITE_BACKEND_URL,
+  timeout: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000'),
   headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
 });
 
