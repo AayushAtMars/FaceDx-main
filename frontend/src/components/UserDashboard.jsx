@@ -27,7 +27,7 @@ const UserDashboard = () => {
         }
 
         console.log('Fetching user data...');
-        const response = await axios.get('/user/profile', {
+        const response = await axios.get('/api/user/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -60,7 +60,7 @@ const UserDashboard = () => {
 
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.post('/update-photo', formData, {
+        const response = await axios.post('/api/update-photo', formData, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
@@ -84,7 +84,7 @@ const UserDashboard = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('/update', formData, {
+      await axios.post('/api/update', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
