@@ -55,7 +55,7 @@ app.use('/api/medical-records', medicalRecordsRouter);
 app.use('/api/user', userRouter);
 app.use('/api/professional', professionalRouter);
 app.use('/api', require('./routes/auth')); // Mount auth routes at /api
-app.use('/api', medicalRecordsRouter); // Mount at /api
+// Removed duplicate medical records route mounting
 
 // Load face-api models
 const loadModels = async () => {
